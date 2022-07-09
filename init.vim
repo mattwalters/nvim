@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/site/plugged')
  Plug 'pangloss/vim-javascript'
  Plug 'leafgarland/typescript-vim'
  Plug 'peitalin/vim-jsx-typescript'
+ Plug 'chr4/nginx.vim'
 
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
@@ -25,6 +26,9 @@ let mapleader = " "
 
 filetype plugin indent on   " required
 syntax on                   " syntax highlighting
+
+" Setting file types
+au BufRead,BufNewFile nginx.conf.erb set ft=nginx
 
 set background=dark
 colorscheme papercolor
@@ -60,10 +64,12 @@ set wildmode=longest:full,full
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-solargraph',
+  \ 'coc-explorer',
   \ 'coc-prettier',
   \ 'coc-eslint',
   \ 'coc-json',
   \ ]
+nmap <space>e <Cmd>CocCommand explorer<CR>
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -94,7 +100,7 @@ nnoremap <C-o> :BLines<Cr>
 
 
 " --- TypeScript Syntax Config ----
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+autocmd BufNewFile,BufRead *.tsx, set filetype=typescriptreact
 
 " --- Minimap Config ----
 let g:minimap_width = 10
